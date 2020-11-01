@@ -45,7 +45,7 @@ function Home(props) {
     }
     return (
         <>
-            <SearchAppBar style={{ position: "sticky",top: 0,zIndex: 100}} onChange={handleChange} value={value} searchable={search}></SearchAppBar>
+            <SearchAppBar   onChange={handleChange} value={value} searchable={search}></SearchAppBar>
         { typeof weather.main !=='undefined' && weather.cod === 200?<Datascreen data={weather} value={value}></Datascreen> :<Errorscreen></Errorscreen>} 
             
         </>

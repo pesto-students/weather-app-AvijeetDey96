@@ -24,3 +24,10 @@
     font-size: 20px;
     text-align:center
 }
+
+.details{
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    font-size: 13px;
+    /* text-align:center */
+}
