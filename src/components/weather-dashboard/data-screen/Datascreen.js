@@ -1,8 +1,7 @@
 import React from 'react';
 import './Datascreen.css'
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
+ import { makeStyles } from '@material-ui/core/styles';
 import sunrise from '../../../../src/assets/icon/sunrise.svg';
 import sunset from '../../../../src/assets/icon/sunset.svg';
 
@@ -37,9 +36,9 @@ function urlMaker(icon) {
 
 function getWeekDay(dt) {
 
-    var d = new Date(dt);
+    let d = new Date(dt);
 
-    var weekday = new Array(7);
+    let weekday = new Array(7);
 
     weekday[0] = "Sun";
 
@@ -64,7 +63,7 @@ function getDay(d) {
     let rawDate = new Date(d)
     let date = rawDate.getDate()
     let day = getWeekDay(d)
-    console.log(date, day);
+
     return (<span>{day}&nbsp;{date}</span>)
 
 }
@@ -78,9 +77,8 @@ function Datascreen(props) {
 
     const weatheData = props.data;
     const allInfoData = props.alldatas;
-    const hourlyData = allInfoData.hourly;
-    const dailyData = allInfoData.list;
-    let { base, clouds, coord, main, name, sys, timezone, visibility, weather, wind } = weatheData;
+     const dailyData = allInfoData.list;
+    let { main, name, sys, visibility, weather, wind } = weatheData;
     let imageUrl = "http://openweathermap.org/img/wn/" + weather[0].icon + "@2x.png"
     const classes = useStyles();
 
@@ -138,7 +136,7 @@ function Datascreen(props) {
                             <div className="box">
                                 <div>{getDay(data.dt_txt)}</div>
                                 <div>{getTime(data.dt_txt)}</div>
-                                <img className="smallImage" src={urlMaker(data.weather[0].icon)} /> <br />
+                                <img className="smallImage" src={urlMaker(data.weather[0].icon)}  alt="avatar" /> <br />
                                 <div> <span style={{ fontSize: "28px", fontWeight: 400 }}>{kelvinToCelsius(data.main.temp_max)}°</span>&nbsp;<span>{kelvinToCelsius(data.main.temp_min)}°</span></div>
                                 <div>
                                     {data.weather[0].description}
@@ -175,12 +173,12 @@ function Datascreen(props) {
                             <div className=" "> 
 
                                 <b>SUNRISE</b> </div>
-                            <div className="sun"> <span><img src={sunrise} className="icon-size" /> </span> &nbsp; {getTime(sys.sunrise)}</div>
+                            <div className="sun"> <span><img src={sunrise} className="icon-size"   alt="avatar"/> </span> &nbsp; {getTime(sys.sunrise)}</div>
 
 
                             <br />
                             <div className=" "> <b>SUNSET</b> </div>
-                            <div  className="sun"> <span><img src={sunset} className="icon-size" /> </span> &nbsp; {getTime(sys.sunset)}</div>
+                            <div  className="sun"> <span><img src={sunset} className="icon-size"  alt="avatar" /> </span> &nbsp; {getTime(sys.sunset)}</div>
                         </div> 
                     </Grid>
                     <Grid item xs={6} lg={3} >
