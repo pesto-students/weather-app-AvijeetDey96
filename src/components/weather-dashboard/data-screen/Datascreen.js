@@ -1,7 +1,7 @@
 import React from 'react';
 import './Datascreen.css'
 import Grid from '@material-ui/core/Grid';
- import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import sunrise from '../../../../src/assets/icon/sunrise.svg';
 import sunset from '../../../../src/assets/icon/sunset.svg';
 
@@ -77,7 +77,7 @@ function Datascreen(props) {
 
     const weatheData = props.data;
     const allInfoData = props.alldatas;
-     const dailyData = allInfoData.list;
+    const dailyData = allInfoData.list;
     let { main, name, sys, visibility, weather, wind } = weatheData;
     let imageUrl = "http://openweathermap.org/img/wn/" + weather[0].icon + "@2x.png"
     const classes = useStyles();
@@ -88,23 +88,23 @@ function Datascreen(props) {
 
                 <Grid container   >
 
-                    <Grid xs={12} >
+                    <Grid xs={12} lg={12} md={12} >
                         <Grid container className="font">
 
-                            <Grid item xs={4}> </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={12} lg={4} md={4}> </Grid>
+                            <Grid item xs={12} lg={4} md={4} >
                                 <p className="font" style={{ fontSize: "25px", margin: "0.5%" }}>{name}</p>
                             </Grid>
-                            <Grid item xs={4}>  </Grid>
-                            <Grid item xs={5}>  </Grid>
-                            <Grid item xs={1}> <img src={imageUrl} /></Grid>
-                            <Grid item xs={1}><span style={{ fontSize: "60px" }}>{kelvinToCelsius(main.temp)}° </span>  C</Grid>
-                            <Grid item xs={5}>  </Grid>
-                            <Grid item xs={5}>  </Grid>
-                            <Grid item xs={2} style={{ fontSize: "25px", lineHeight: "0" }}><span>{weather[0].description}</span>  </Grid>
-                            <Grid item xs={5}>  </Grid>
-                            <Grid item xs={4}>  </Grid>
-                            <Grid item xs={4} style={{ marginTop: "21px" }}>
+                            <Grid item xs={12} lg={4} md={4}>  </Grid>
+                            <Grid item xs={12} lg={5} md={5}>  </Grid>
+                            <Grid item xs={12} lg={1} md={1}> <img src={imageUrl} /></Grid>
+                            <Grid item xs={12} lg={1} md={1}><span style={{ fontSize: "60px" }}>{kelvinToCelsius(main.temp)}° </span>  C</Grid>
+                            <Grid item xs={12} lg={5} md={5}>  </Grid>
+                            <Grid item xs={12} lg={5} md={5}>  </Grid>
+                            <Grid item xs={12} lg={2} md={2} style={{ fontSize: "25px", lineHeight: "0" }}><span>{weather[0].description}</span>  </Grid>
+                            <Grid item xs={12} lg={5} md={5}>  </Grid>
+                            <Grid item xs={12} lg={4} md={4}>  </Grid>
+                            <Grid item xs={12} lg={4} md={4} style={{ marginTop: "21px" }}>
                                 <Grid container spacing={1} className="details">
                                     <Grid item xs={4}> <span>Feels like &nbsp; {kelvinToCelsius(main.feels_like)} °C</span> </Grid>
                                     <Grid item xs={4}> <span>Wind speed  &nbsp;  {mtPerSecToKmHr(wind.speed)} km/h</span> </Grid>
@@ -114,12 +114,12 @@ function Datascreen(props) {
                                     <Grid item xs={4}> <span>Sea Level  &nbsp; {main.sea_level ? main.sea_level : 0}  hPa </span> </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item xs={4}>  </Grid>
+                            <Grid item xs={12} lg={4} md={4}>  </Grid>
 
                         </Grid>
 
                     </Grid>
- 
+
                 </Grid>
 
 
@@ -129,24 +129,30 @@ function Datascreen(props) {
                 <div className="font" style={{ float: "left", padding: "2%" }}>Daily and Hourly</div>
 
                 <br />
-
-                <div className="container-1 scrolling-wrapper">
-                    {typeof dailyData != 'undefined' && dailyData.length > 0 ? dailyData.map((data, index) => (
-                        <div className="flex-box wrapper">
-                            <div className="box">
-                                <div>{getDay(data.dt_txt)}</div>
-                                <div>{getTime(data.dt_txt)}</div>
-                                <img className="smallImage" src={urlMaker(data.weather[0].icon)}  alt="avatar" /> <br />
-                                <div> <span style={{ fontSize: "28px", fontWeight: 400 }}>{kelvinToCelsius(data.main.temp_max)}°</span>&nbsp;<span>{kelvinToCelsius(data.main.temp_min)}°</span></div>
-                                <div>
-                                    {data.weather[0].description}
+                <Grid container>
+                    <Grid item lg={12} md={12} xs={12}>
+                    <div className="container-1 scrolling-wrapper">
+                        {typeof dailyData != 'undefined' && dailyData.length > 0 ? dailyData.map((data, index) => (
+                            <div className="flex-box wrapper">
+                                <div className="box">
+                                    <div>{getDay(data.dt_txt)}</div>
+                                    <div>{getTime(data.dt_txt)}</div>
+                                    <img className="smallImage" src={urlMaker(data.weather[0].icon)} alt="avatar" /> <br />
+                                    <div> <span style={{ fontSize: "28px", fontWeight: 400 }}>{kelvinToCelsius(data.main.temp_max)}°</span>&nbsp;<span>{kelvinToCelsius(data.main.temp_min)}°</span></div>
+                                    <div>
+                                        {data.weather[0].description}
+                                    </div>
                                 </div>
+
                             </div>
+                        )) : ''}
 
-                        </div>
-                    )) : ''}
+                    </div>
 
-                </div>
+                    </Grid>
+                  
+                </Grid>
+
 
 
                 <div className="font" style={{ float: "left", padding: "2%" }}>Day Details</div>
@@ -156,39 +162,39 @@ function Datascreen(props) {
                 <Grid container className="details day-details"  >
                     <Grid item xs={6} lg={3} >
                         <div className="grid-border">
-                              <hr/>
+                            <hr />
                             <div className=" "><b>Day</b> </div>
 
-                            <div className="font" style={{textAlign: 'left'}}>The high will be {kelvinToCelsius(main.temp_max)} </div>
+                            <div className="font" style={{ textAlign: 'left' }}>The high will be {kelvinToCelsius(main.temp_max)} </div>
                             <br />
                             <div className=" "> <b>Night</b> </div>
 
-                            <div className="font" style={{textAlign: 'left'}}>The low will be {kelvinToCelsius(main.temp_min)}  </div>
+                            <div className="font" style={{ textAlign: 'left' }}>The low will be {kelvinToCelsius(main.temp_min)}  </div>
                         </div>
 
                     </Grid>
                     <Grid item xs={6} lg={3} >
                         <div className="grid-border">
-                            <hr/>
-                            <div className=" "> 
+                            <hr />
+                            <div className=" ">
 
                                 <b>SUNRISE</b> </div>
-                            <div className="sun"> <span><img src={sunrise} className="icon-size"   alt="avatar"/> </span> &nbsp; {getTime(sys.sunrise)}</div>
+                            <div className="sun"> <span><img src={sunrise} className="icon-size" alt="avatar" /> </span> &nbsp; {getTime(sys.sunrise)}</div>
 
 
                             <br />
                             <div className=" "> <b>SUNSET</b> </div>
-                            <div  className="sun"> <span><img src={sunset} className="icon-size"  alt="avatar" /> </span> &nbsp; {getTime(sys.sunset)}</div>
-                        </div> 
+                            <div className="sun"> <span><img src={sunset} className="icon-size" alt="avatar" /> </span> &nbsp; {getTime(sys.sunset)}</div>
+                        </div>
                     </Grid>
                     <Grid item xs={6} lg={3} >
                         <div className="grid-border">
-                             
+
                         </div>
                     </Grid>
                     <Grid item xs={6} lg={3}   >
                         <div className="grid-border">
-                             
+
                         </div>
                     </Grid>
 
