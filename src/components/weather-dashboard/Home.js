@@ -15,11 +15,6 @@ const api = {
 
 }
 
-var options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
-};
 
 
  
@@ -27,6 +22,14 @@ function Home(props) {
     const [value, handleChange, reset] = useInpuState("");
     const [weather, setWeather] = useState({})
     const [allWeather, setAllWeather] = useState({})
+    const [loader, setLoader] = useState(false)
+
+    // var options = {
+    //     enableHighAccuracy: true,
+    //     timeout: 5000,
+    //     maximumAge: 0
+    // };
+    
 //     function success(pos) {
 //         var crd = pos.coords;
 //          getLocationUsinfLonLat(crd.longitude, crd.latitude)
@@ -63,7 +66,7 @@ function Home(props) {
         evt.preventDefault();
         if (evt.key === "Enter") {
             let url = `${api.base}?q=${value}&appid=${api.key}`
-            console.log(url);
+           setLoader(true);
             axios.get(url)
                 .then(function (res) {
 
@@ -76,6 +79,7 @@ function Home(props) {
                     console.log(error);
                     let result ={message:'city not found'}
                     setWeather(result);
+
                 })
 
         }
@@ -89,6 +93,7 @@ function Home(props) {
                 let result = res.data;
                 setAllWeather(result);
                 reset();
+                setLoader(false);
             })
             .catch(function (error) {
                 // handle error
@@ -96,12 +101,12 @@ function Home(props) {
             })
 
     }
+ 
     return (
         <>
             <div style={{ backgroundAttachment: "fixed" }}> <SearchAppBar onChange={handleChange} value={value} searchable={search}></SearchAppBar> </div>
-
             { typeof weather.main !== 'undefined' && weather.cod === 200 ? <Datascreen alldatas={allWeather} data={weather} value={value}></Datascreen> : <Errorscreen data={weather}></Errorscreen>}
-
+            
         </>
     );
 }
