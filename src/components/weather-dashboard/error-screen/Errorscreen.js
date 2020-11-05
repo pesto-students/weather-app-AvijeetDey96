@@ -1,9 +1,14 @@
 import React from 'react';
+import './errorscreen.css'
 
 function Errorscreen(props) {
+    const weatheData = props.data.message;
     return (
-        <div>
-           Errorscreen
+        <div  className="background-cover night ">
+           <div className=" fonta">
+           {weatheData}
+           </div>
+          
         </div>
     );
 }

@@ -3,8 +3,10 @@
     background-size: cover;
     background-position: bottom;
     transition:0.4s ease-out;
-    height:720px;
+    height:100%;
     background-attachment: fixed;
+    width:100% !important;
+   
 }
 
 .night{
@@ -50,7 +52,7 @@
     height: 155px;
     padding: 2%;
     margin: 1px;
-    padding-bottom: 10%;
+    padding-bottom: 20px
 
 }
 .box:hover{
@@ -95,4 +97,23 @@
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #ffffff59;
+  }
+
+  .grid-border{
+    padding-right: 6px;
+    /* margin: 21px; */
+    margin: 10px;
+    margin-left: 31px;
+  }
+
+  .day-details{ 
+     text-align:left;
+    
+  }
+  .icon-size{
+    height: 35px;
+  }
+
+  .sun{
+    font-size: 30px;
   }

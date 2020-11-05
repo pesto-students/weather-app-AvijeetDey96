@@ -3,7 +3,8 @@ import './Datascreen.css'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-
+import sunrise from '../../../../src/assets/icon/sunrise.svg';
+import sunset from '../../../../src/assets/icon/sunset.svg';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,7 +36,7 @@ function urlMaker(icon) {
 }
 
 function getWeekDay(dt) {
-     
+
     var d = new Date(dt);
 
     var weekday = new Array(7);
@@ -54,18 +55,24 @@ function getWeekDay(dt) {
 
     weekday[6] = "Sat";
 
-    
+
     let n = weekday[d.getDay()];
-    return n  
-    
+    return n
+
 }
-function getDay(d) { 
+function getDay(d) {
     let rawDate = new Date(d)
-    let date= rawDate.getDate()
-   let day = getWeekDay(d)
-   console.log(date,day);
-   return (<span>{day}&nbsp;{date}</span>)
-   
+    let date = rawDate.getDate()
+    let day = getWeekDay(d)
+    console.log(date, day);
+    return (<span>{day}&nbsp;{date}</span>)
+
+}
+function getTime(dt) {
+    let rawDate = new Date(dt);
+    let hour = rawDate.getHours()
+    let minute = rawDate.getMinutes()
+    return (<span>{hour}:{minute}</span>)
 }
 function Datascreen(props) {
 
@@ -73,7 +80,6 @@ function Datascreen(props) {
     const allInfoData = props.alldatas;
     const hourlyData = allInfoData.hourly;
     const dailyData = allInfoData.list;
-    console.log('dailyData', dailyData)
     let { base, clouds, coord, main, name, sys, timezone, visibility, weather, wind } = weatheData;
     let imageUrl = "http://openweathermap.org/img/wn/" + weather[0].icon + "@2x.png"
     const classes = useStyles();
@@ -115,51 +121,80 @@ function Datascreen(props) {
                         </Grid>
 
                     </Grid>
-
+ 
                 </Grid>
 
 
-                {/* <div className="font" style={{ float: "left", padding: "2%" }}>Daily</div>
 
-                <div className="container-1">
-                    {typeof dailyData !== 'undefined' && dailyData.length > 0 ? dailyData.map((data, index) =>
-                   
-                    (
-                       
-                         <div className="flex-box" key={index}>
-                                <div className="box">
-                                    <div>Mon 2</div>
-                                     
-                                    <img className="smallImage" src={urlMaker(data.weather[0].icon)} />
-                                </div>
-
-                            </div>
-                       
-                    ) ) : 'No Data Available'}
-
-                 </div> */}
                 <br />
 
                 <div className="font" style={{ float: "left", padding: "2%" }}>Daily and Hourly</div>
-               
-                <br/>
+
+                <br />
 
                 <div className="container-1 scrolling-wrapper">
                     {typeof dailyData != 'undefined' && dailyData.length > 0 ? dailyData.map((data, index) => (
                         <div className="flex-box wrapper">
                             <div className="box">
-                        <div>{getDay(data.dt_txt)}</div>
-                            <img className="smallImage" src={urlMaker(data.weather[0].icon)} /> <br/>
-                             <div> <span style={{    fontSize: "28px",fontWeight: 400}}>{kelvinToCelsius(data.main.temp_max)}°</span>&nbsp;<span>{kelvinToCelsius(data.main.temp_min)}°</span></div> 
-                            <div>
-                                {data.weather[0].description}
-                            </div>
+                                <div>{getDay(data.dt_txt)}</div>
+                                <div>{getTime(data.dt_txt)}</div>
+                                <img className="smallImage" src={urlMaker(data.weather[0].icon)} /> <br />
+                                <div> <span style={{ fontSize: "28px", fontWeight: 400 }}>{kelvinToCelsius(data.main.temp_max)}°</span>&nbsp;<span>{kelvinToCelsius(data.main.temp_min)}°</span></div>
+                                <div>
+                                    {data.weather[0].description}
+                                </div>
                             </div>
 
                         </div>
                     )) : ''}
 
                 </div>
+
+
+                <div className="font" style={{ float: "left", padding: "2%" }}>Day Details</div>
+
+
+                <br />
+                <Grid container className="details day-details"  >
+                    <Grid item xs={6} lg={3} >
+                        <div className="grid-border">
+                              <hr/>
+                            <div className=" "><b>Day</b> </div>
+
+                            <div className="font" style={{textAlign: 'left'}}>The high will be {kelvinToCelsius(main.temp_max)} </div>
+                            <br />
+                            <div className=" "> <b>Night</b> </div>
+
+                            <div className="font" style={{textAlign: 'left'}}>The low will be {kelvinToCelsius(main.temp_min)}  </div>
+                        </div>
+
+                    </Grid>
+                    <Grid item xs={6} lg={3} >
+                        <div className="grid-border">
+                            <hr/>
+                            <div className=" "> 
+
+                                <b>SUNRISE</b> </div>
+                            <div className="sun"> <span><img src={sunrise} className="icon-size" /> </span> &nbsp; {getTime(sys.sunrise)}</div>
+
+
+                            <br />
+                            <div className=" "> <b>SUNSET</b> </div>
+                            <div  className="sun"> <span><img src={sunset} className="icon-size" /> </span> &nbsp; {getTime(sys.sunset)}</div>
+                        </div> 
+                    </Grid>
+                    <Grid item xs={6} lg={3} >
+                        <div className="grid-border">
+                             
+                        </div>
+                    </Grid>
+                    <Grid item xs={6} lg={3}   >
+                        <div className="grid-border">
+                             
+                        </div>
+                    </Grid>
+
+                </Grid>
 
             </div></>
 
