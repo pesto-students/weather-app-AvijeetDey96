@@ -1,0 +1,28 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+.background-cover{
+    background-size: cover;
+    background-position: bottom;
+    transition:0.4s ease-out;
+    height:768px;
+    background-attachment: fixed;
+    width:100% !important;
+}
+
+.night{
+    background-image: linear-gradient(to top, #080808, #17191ad0, #8091915b, #bac2be15, #f5f6f321),url(https://cutewallpaper.org/21/4k-sky-wallpaper/Night-sky-stars-and-comet-Wallpaper-4k-Ultra-HD-ID3036.jpg);
+
+    /* background-image: url(https://cutewallpaper.org/21/4k-sky-wallpaper/Night-sky-stars-and-comet-Wallpaper-4k-Ultra-HD-ID3036.jpg); */
+}
+.morning{
+    background-image: linear-gradient(to top, #293343, #4e616a, #809191, #bac2be, #f5f6f3),url(https://wallpaperaccess.com/full/175910.jpg);
+}
+
+.fonta{
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+     
+    font-size: 50px;
+    padding-top: 5%;
+    text-align:center
+}
