@@ -3,11 +3,12 @@
     background-size: cover;
     background-position: bottom;
     transition:0.4s ease-out;
-    height:100% !important;
+    height:100vh !important;
+    height:2000px !important;
     background-attachment: fixed;
     width:100% !important;
-   
-}
+     
+} 
 
 .night{
     background-image: linear-gradient(to top, #080808, #17191ad0, #8091915b, #bac2be15, #f5f6f321),url(https://cutewallpaper.org/21/4k-sky-wallpaper/Night-sky-stars-and-comet-Wallpaper-4k-Ultra-HD-ID3036.jpg);
