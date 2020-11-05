@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from '@material-ui/core'
-import SearchAppBar from '../sections/Navbar'
+import React, { useState } from 'react';
+ import SearchAppBar from '../sections/Navbar'
 import Datascreen from './data-screen/Datascreen'
 import Errorscreen from './error-screen/Errorscreen'
 
@@ -67,7 +66,7 @@ function Home(props) {
 
     const search = evt => {
         evt.preventDefault();
-        if (evt.key == "Enter") {
+        if (evt.key === "Enter") {
             // let url = `${api.base}?q=${value}&appid=${api.key}`
             let url = `${api.corsUrl}/${api.base}?q=${value}&appid=${api.key}`
             // const proxyurl = "https://cors-anywhere.herokuapp.com/";
