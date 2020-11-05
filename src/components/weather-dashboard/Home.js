@@ -8,7 +8,9 @@ import axios from "axios";
 
 let geoWeather = 'aaa';
 const api = {
-    key: 'a03ddfcfde2a4376a2d6d014ec9fbf6c',
+    key: 'd172dc99a5e30b034410018f07063660',
+    
+
     base: 'https://api.openweathermap.org/data/2.5/weather',
     daysCall: 'https://api.openweathermap.org/data/2.5/forecast',
     // corsUrl: 'https://cors-anywhere.herokuapp.com',
@@ -91,7 +93,7 @@ function Home(props) {
 
                 })
  }
- defaultSearch();
+//  defaultSearch();
     const search = evt => {
         evt.preventDefault();
         if (evt.key === "Enter") {
