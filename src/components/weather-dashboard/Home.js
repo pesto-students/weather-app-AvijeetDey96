@@ -8,7 +8,9 @@ import axios from "axios";
 
 let geoWeather = 'aaa';
 const api = {
-    key: 'a03ddfcfde2a4376a2d6d014ec9fbf6c',
+    key: 'd172dc99a5e30b034410018f07063660',
+    
+
     base: 'https://api.openweathermap.org/data/2.5/weather',
     daysCall: 'https://api.openweathermap.org/data/2.5/forecast',
     // corsUrl: 'https://cors-anywhere.herokuapp.com',
@@ -61,7 +63,37 @@ function Home(props) {
     useEffect(()=>{
         
     })
+ const defaultSearch =()=>{
+    let url = `${api.base}?q=siliguri&appid=${api.key}`
+    axios.get(url)
+                .then(function (res) {
 
+                    let result = res.data;
+                    setWeather(result);
+                    let url = `${api.daysCall}?q=siliguri&appid=${api.key}`
+
+                    // axios.get(url)
+                    //     .then(function (res) {
+                    //         console.log('weather', res.data)
+                    //         let result = res.data;
+                    //         setAllWeather(result);
+                    //         reset();
+                    //         setLoader(false);
+                    //     })
+                    //     .catch(function (error) {
+                    //         // handle error
+                    //         console.log(error);
+                    //     })
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                    let result ={message:'city not found'}
+                    setWeather(result);
+
+                })
+ }
+//  defaultSearch();
     const search = evt => {
         evt.preventDefault();
         if (evt.key === "Enter") {
