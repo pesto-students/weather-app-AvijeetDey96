@@ -8,7 +8,7 @@ import sunset from '../../../../src/assets/icon/sunset.svg';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-    }, 
+    },
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
@@ -93,7 +93,7 @@ function Datascreen(props) {
 
                             <Grid item xs={12} lg={4} md={4}> </Grid>
                             <Grid item xs={12} lg={4} md={4} >
-                                <p className="font" style={{ fontSize: "25px", margin: "0.5%" }}>{name}</p>
+                                <p className="font" style={{ fontSize: "25px", margin: "0.5%" }}>{name},{sys.country}</p>
                             </Grid>
                             <Grid item xs={12} lg={4} md={4}>  </Grid>
                             <Grid item xs={12} lg={5} md={5}>  </Grid>
@@ -126,31 +126,31 @@ function Datascreen(props) {
 
                 <br />
 
-                <div className="font" style={{ float: "left", padding: "2%" }}>Daily and Hourly</div>
+                <div className="font" style={{ float: "left", padding: "2%", paddingBottom: "0px"}}>Daily and Hourly</div>
 
                 <br />
                 <Grid container>
                     <Grid item lg={12} md={12} xs={12}>
-                    <div className="container-1 scrolling-wrapper">
-                        {typeof dailyData != 'undefined' && dailyData.length > 0 ? dailyData.map((data, index) => (
-                            <div className="flex-box wrapper">
-                                <div className="box">
-                                    <div>{getDay(data.dt_txt)}</div>
-                                    <div>{getTime(data.dt_txt)}</div>
-                                    <img className="smallImage" src={urlMaker(data.weather[0].icon)} alt="avatar" /> <br />
-                                    <div> <span style={{ fontSize: "28px", fontWeight: 400 }}>{kelvinToCelsius(data.main.temp_max)}°</span>&nbsp;<span>{kelvinToCelsius(data.main.temp_min)}°</span></div>
-                                    <div>
-                                        {data.weather[0].description}
+                        <div className="container-1 scrolling-wrapper">
+                            {typeof dailyData != 'undefined' && dailyData.length > 0 ? dailyData.map((data, index) => (
+                                <div className="flex-box wrapper">
+                                    <div className="box">
+                                        <div>{getDay(data.dt_txt)}</div>
+                                        <div>{getTime(data.dt_txt)}</div>
+                                        <img className="smallImage" src={urlMaker(data.weather[0].icon)} alt="avatar" /> <br />
+                                        <div> <span style={{ fontSize: "28px", fontWeight: 400 }}>{kelvinToCelsius(data.main.temp_max)}°</span>&nbsp;<span>{kelvinToCelsius(data.main.temp_min)}°</span></div>
+                                        <div>
+                                            {data.weather[0].description}
+                                        </div>
                                     </div>
+
                                 </div>
+                            )) : ''}
 
-                            </div>
-                        )) : ''}
-
-                    </div>
+                        </div>
 
                     </Grid>
-                  
+
                 </Grid>
 
 

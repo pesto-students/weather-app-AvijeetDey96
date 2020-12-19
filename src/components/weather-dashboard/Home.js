@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchAppBar from '../sections/Navbar'
 import Datascreen from './data-screen/Datascreen'
 import Errorscreen from './error-screen/Errorscreen'
@@ -8,97 +8,61 @@ import axios from "axios";
 
 let geoWeather = 'aaa';
 const api = {
-    key: 'd172dc99a5e30b034410018f07063660',
-    
-
+    // key: 'd172dc99a5e30b034410018f07063660',
+    key:'9e1e8efd40fb550bfefb6451701a4a57',
     base: 'https://api.openweathermap.org/data/2.5/weather',
     daysCall: 'https://api.openweathermap.org/data/2.5/forecast',
     // corsUrl: 'https://cors-anywhere.herokuapp.com',
-
 }
 
 
 
- 
+
 function Home(props) {
     const [value, handleChange, reset] = useInpuState("");
     const [weather, setWeather] = useState({})
     const [allWeather, setAllWeather] = useState({})
     const [loader, setLoader] = useState(false)
 
-    // var options = {
-    //     enableHighAccuracy: true,
-    //     timeout: 5000,
-    //     maximumAge: 0
-    // };
-    
-//     function success(pos) {
-//         var crd = pos.coords;
-//          getLocationUsinfLonLat(crd.longitude, crd.latitude)
-//     }
-    
-//     function error(err) {
-//         console.warn(`ERROR(${err.code}): ${err.message}`);
-//     }
-    
-    
-//      function getGeo(){
-//         navigator.geolocation.getCurrentPosition(success, error, options);
-//      }
-//     const getLocationUsinfLonLat = (lon, lat) => {
-//         let url = `${api.base}?lat=${lat}&lon=${lon}&appid=${api.key}`
    
-//        axios.get(url)
-//            .then(function (res) {
-//                let result = res.data;
-//                geoWeather = result;
-//                return result;
-//            })
-//            .catch(function (error) {
-//                // handle error
-//                console.log(error);
-//            })
-//    }
-//    getGeo();
-    useEffect(()=>{
-        
-    })
- const defaultSearch =()=>{
-    let url = `${api.base}?q=siliguri&appid=${api.key}`
-    axios.get(url)
-                .then(function (res) {
+    const defaultSearch = () => {
+        let url = `${api.base}?q=Delhi&appid=${api.key}`
+        axios.get(url)
+            .then(function (res) {
 
-                    let result = res.data;
-                    setWeather(result);
-                    let url = `${api.daysCall}?q=siliguri&appid=${api.key}`
+                let result = res.data;
+                setWeather(result);
+                let url = `${api.daysCall}?q=siliguri&appid=${api.key}`
 
-                    // axios.get(url)
-                    //     .then(function (res) {
-                    //         console.log('weather', res.data)
-                    //         let result = res.data;
-                    //         setAllWeather(result);
-                    //         reset();
-                    //         setLoader(false);
-                    //     })
-                    //     .catch(function (error) {
-                    //         // handle error
-                    //         console.log(error);
-                    //     })
-                })
-                .catch(function (error) {
-                    // handle error
-                    console.log(error);
-                    let result ={message:'city not found'}
-                    setWeather(result);
+                axios.get(url)
+                    .then(function (res) {
+                        console.log('weather', res.data)
+                        let result = res.data;
+                        setAllWeather(result);
+                        reset();
+                        setLoader(false);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+                let result = { message: 'city not found' }
+                setWeather(result);
 
-                })
- }
-//  defaultSearch();
+            })
+    }
+    useEffect(() => {
+        defaultSearch();
+    },[])
     const search = evt => {
         evt.preventDefault();
         if (evt.key === "Enter") {
             let url = `${api.base}?q=${value}&appid=${api.key}`
-           setLoader(true);
+            setLoader(true);
             axios.get(url)
                 .then(function (res) {
 
@@ -109,7 +73,7 @@ function Home(props) {
                 .catch(function (error) {
                     // handle error
                     console.log(error);
-                    let result ={message:'city not found'}
+                    let result = { message: 'city not found' }
                     setWeather(result);
 
                 })
@@ -133,12 +97,12 @@ function Home(props) {
             })
 
     }
- 
+
     return (
         <>
             <div style={{ backgroundAttachment: "fixed" }}> <SearchAppBar onChange={handleChange} value={value} searchable={search}></SearchAppBar> </div>
             { typeof weather.main !== 'undefined' && weather.cod === 200 ? <Datascreen alldatas={allWeather} data={weather} value={value}></Datascreen> : <Errorscreen data={weather}></Errorscreen>}
-            
+
         </>
     );
 }
