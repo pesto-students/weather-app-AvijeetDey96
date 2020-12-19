@@ -84,7 +84,7 @@ function Datascreen(props) {
 
     return (
         <>
-            <div className={classes.root} className="background-cover night">
+            <div className={classes.root} className="background-cover static">
 
                 <Grid container   >
 
@@ -93,7 +93,7 @@ function Datascreen(props) {
 
                             <Grid item xs={12} lg={4} md={4}> </Grid>
                             <Grid item xs={12} lg={4} md={4} >
-                                <p className="font" style={{ fontSize: "25px", margin: "0.5%" }}>{name},{sys.country}</p>
+                                <p className="font" style={{ fontSize: "42px", margin: "0.5%" }}>{name},{sys.country}</p>
                             </Grid>
                             <Grid item xs={12} lg={4} md={4}>  </Grid>
                             <Grid item xs={12} lg={5} md={5}>  </Grid>
@@ -104,7 +104,7 @@ function Datascreen(props) {
                             <Grid item xs={12} lg={2} md={2} style={{ fontSize: "25px", lineHeight: "0" }}><span>{weather[0].description}</span>  </Grid>
                             <Grid item xs={12} lg={5} md={5}>  </Grid>
                             <Grid item xs={12} lg={4} md={4}>  </Grid>
-                            <Grid item xs={12} lg={4} md={4} style={{ marginTop: "21px" }}>
+                            <Grid item xs={12} lg={4} md={4} style={{ marginTop: "25px",boxShadow:'0 0 10px 0 rgba(0,0,0,0.3)',padding:'20px' }}>
                                 <Grid container spacing={1} className="details">
                                     <Grid item xs={4}> <span>Feels like &nbsp; {kelvinToCelsius(main.feels_like)} °C</span> </Grid>
                                     <Grid item xs={4}> <span>Wind speed  &nbsp;  {mtPerSecToKmHr(wind.speed)} km/h</span> </Grid>

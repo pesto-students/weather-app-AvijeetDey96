@@ -6,6 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import mausam from '../../../src/assets/logo/logo2.png'
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import PropTypes from 'prop-types';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -62,44 +67,66 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+function ElevationScroll(props) {
+    const { children, window } = props;
+    const trigger = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 0,
+        target: window ? window() : undefined,
+    });
+
+    return React.cloneElement(children, {
+        elevation: trigger ? 4 : 0,
+    });
+}
+
+ElevationScroll.propTypes = {
+    children: PropTypes.element.isRequired,
+    window: PropTypes.func,
+};
+
+
 export default function SearchAppBar(props) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton
-                        edge="start"
-                        className={classes.menuButton}
-                        color="inherit"
-                        aria-label="open drawer"
-                    >
-                        {/* <MenuIcon /> */}
-                        <Typography className={classes.title} variant="h6" noWrap>
-                            Weather Forecast
-                      </Typography>
-                    </IconButton>
-                    <Typography className={classes.title} variant="h6" noWrap>
+            <CssBaseline />
+            <ElevationScroll {...props}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            edge="start"
+                            className={classes.menuButton}
+                            color="inherit"
+                            aria-label="open drawer"
+                        >
+                            {/* <MenuIcon /> */}
 
-                    </Typography>
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
+                            <img style={{ width: '60%' }} src={mausam} />
+
+                        </IconButton>
+                        <Typography className={classes.title} variant="h6" noWrap>
+
+                        </Typography>
+                        <div className={classes.search}>
+                            <div className={classes.searchIcon}>
+                                <SearchIcon />
+                            </div>
+                            <InputBase
+                                placeholder="Search…"
+                                classes={{
+                                    root: classes.inputRoot,
+                                    input: classes.inputInput,
+                                }}
+                                inputProps={{ 'aria-label': 'search' }}
+                                value={props.value}
+                                onChange={props.onChange}
+                                onKeyUp={props.searchable}
+                            />
                         </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                            value={props.value}
-                            onChange={props.onChange}
-                            onKeyUp={props.searchable}
-                        />
-                    </div>
-                </Toolbar>
-            </AppBar>
+                    </Toolbar>
+                </AppBar>
+            </ElevationScroll>
         </div>
     );
 }
