@@ -77,7 +77,7 @@ export default function SearchAppBar(props) {
                         {/* <MenuIcon /> */}
                         <Typography className={classes.title} variant="h6" noWrap>
                             Weather Forecast
-          </Typography>
+                      </Typography>
                     </IconButton>
                     <Typography className={classes.title} variant="h6" noWrap>
 
